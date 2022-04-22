@@ -1,5 +1,10 @@
 package com.hanxiao.mall.dao;
 
+import com.hanxiao.mall.model.Admin;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+
 /**
  * @description:
  * @author: hanxiao
@@ -7,4 +12,7 @@ package com.hanxiao.mall.dao;
  **/
 public interface AdminDao {
 
+    Integer login(@Param("admin") Admin admin);
+
+    List<Admin> allAdmins();
 }

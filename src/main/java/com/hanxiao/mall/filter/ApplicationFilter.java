@@ -18,6 +18,8 @@ public class ApplicationFilter implements Filter {
         response.setHeader("Access-Control-Allow-Methods", "POST,GET,OPTIONS,PUT,DELETE");
         response.setHeader("Access-Control-Allow-Headers", "x-requested-with,Authorization,Content-Type");
         response.setHeader("Access-Control-Allow-Credentials", "true");
+        request.setCharacterEncoding("utf-8");
+        response.setContentType("text/html;charset=utf-8");
         chain.doFilter(req, resp);
     }
 

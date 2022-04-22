@@ -1,4 +1,4 @@
-package com.hanxiao.mall.model;
+package com.hanxiao.mall.model.bo;
 
 /**
  * @description:

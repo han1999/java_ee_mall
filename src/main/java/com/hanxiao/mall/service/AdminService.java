@@ -1,6 +1,9 @@
 package com.hanxiao.mall.service;
 
-import com.hanxiao.mall.model.AdminLoginBO;
+import com.hanxiao.mall.model.bo.AdminLoginBO;
+import com.hanxiao.mall.model.vo.AdminInfoVO;
+
+import java.util.List;
 
 /**
  * @description:
@@ -9,4 +12,6 @@ import com.hanxiao.mall.model.AdminLoginBO;
  **/
 public interface AdminService {
     int login(AdminLoginBO adminLoginBO);
+
+    List<AdminInfoVO> allAdmins();
 }

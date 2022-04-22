@@ -7,7 +7,7 @@ package com.hanxiao.mall.model;
  **/
 
 public class Admin {
-    private int id;
+    private Integer id;
     private String username;
     private String nickname;
     private String password;
@@ -22,12 +22,19 @@ public class Admin {
                 '}';
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Admin(Integer id, String username, String nickname, String password) {
+        this.id = id;
+        this.username = username;
+        this.nickname = nickname;
+        this.password = password;
     }
 
     public String getUsername() {
