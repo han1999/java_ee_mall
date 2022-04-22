@@ -3,11 +3,13 @@ package com.hanxiao.mall.controller;
 import com.google.gson.Gson;
 import com.hanxiao.mall.model.Result;
 import com.hanxiao.mall.model.bo.AdminLoginBO;
+import com.hanxiao.mall.model.bo.AdminSearchBO;
 import com.hanxiao.mall.model.vo.AdminInfoVO;
 import com.hanxiao.mall.model.vo.AdminLoginVO;
 import com.hanxiao.mall.service.AdminService;
 import com.hanxiao.mall.service.AdminServiceImpl;
 import com.hanxiao.mall.utils.Constant;
+import com.hanxiao.mall.utils.HttpUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.ServletInputStream;
@@ -28,7 +30,16 @@ public class AdminServlet extends javax.servlet.http.HttpServlet {
         String action = requestURI.replace(request.getContextPath() + "/api/admin/admin/", "");
         if ("login".equals(action)) {
             login(request, response);
+        } else if ("getSearchAdmins".equals(action)) {
+            getSearchAdmins(request, response);
         }
+    }
+
+    private void getSearchAdmins(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String requestBody = HttpUtils.getRequestBody(request);
+        AdminSearchBO adminSearchBO = gson.fromJson(requestBody, AdminSearchBO.class);
+        List<AdminInfoVO> searchAdmins = adminService.getSearchAdmins(adminSearchBO);
+        response.getWriter().println(gson.toJson(Result.ok(searchAdmins)));
     }
 
     private void login(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -39,7 +50,7 @@ public class AdminServlet extends javax.servlet.http.HttpServlet {
         while ((len = inputStream.read(bytes)) != -1) {
             byteArrayOutputStream.write(bytes, 0, len);
         }
-        String requestBody = byteArrayOutputStream.toString();
+        String requestBody = byteArrayOutputStream.toString("utf-8");
 
         AdminLoginBO adminLoginBO = gson.fromJson(requestBody, AdminLoginBO.class);
 
@@ -68,7 +79,15 @@ public class AdminServlet extends javax.servlet.http.HttpServlet {
         String action = requestURI.replace(request.getContextPath() + "/api/admin/admin/", "");
         if ("allAdmins".equals(action)) {
             allAdmins(request, response);
+        } else if ("getAdminsInfo".equals(action)) {
+            getAdminsInfo(request, response);
         }
+    }
+
+    private void getAdminsInfo(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String id = request.getParameter("id");
+        AdminInfoVO adminInfoVO = adminService.getAdminsInfo(Integer.parseInt(id));
+        response.getWriter().println(gson.toJson(Result.ok(adminInfoVO)));
     }
 
     private void allAdmins(HttpServletRequest request, HttpServletResponse response) throws IOException {

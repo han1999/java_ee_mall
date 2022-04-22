@@ -11,6 +11,18 @@ public class Result {
     private String message;
     private Object data;
 
+    public static Result ok(Object data) {
+        return new Result(0, null, data);
+    }
+
+    public static Result ok() {
+        return ok(null);
+    }
+
+    public static Result error(String message) {
+        return new Result(10000, message, null);
+    }
+
     @Override
     public String toString() {
         return "Result{" +

@@ -14,5 +14,7 @@ public interface AdminDao {
 
     Integer login(@Param("admin") Admin admin);
 
-    List<Admin> allAdmins();
+    List<Admin> allAdmins(Admin admin);
+
+    Admin getAdminsInfo(Integer id);
 }
