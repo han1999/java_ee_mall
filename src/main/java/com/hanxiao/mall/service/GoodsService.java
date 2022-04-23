@@ -2,6 +2,7 @@ package com.hanxiao.mall.service;
 
 
 import com.hanxiao.mall.model.Type;
+import com.hanxiao.mall.model.bo.AddGoodsBO;
 import com.hanxiao.mall.model.vo.GoodsByTypeVO;
 
 import java.util.List;
@@ -18,4 +19,5 @@ public interface GoodsService {
 
     List<GoodsByTypeVO> getGoodsByType(int typeId);
 
+    void addGoods(AddGoodsBO addGoodsBO);
 }

@@ -1,6 +1,7 @@
 package com.hanxiao.mall.dao;
 
 import com.hanxiao.mall.model.Goods;
+import com.hanxiao.mall.model.Spec;
 import com.hanxiao.mall.model.Type;
 
 import java.util.List;
@@ -14,5 +15,10 @@ import java.util.List;
 public interface GoodsDao {
     List<Type> getType();
 
-    List<Goods> getGoodsByTypeVO(int typeId);
+    List<Goods> getGoodsByType(int typeId);
+
+    void addGoods(Goods goods);
+
+    void addSpecs(List<Spec> specs);
+
 }

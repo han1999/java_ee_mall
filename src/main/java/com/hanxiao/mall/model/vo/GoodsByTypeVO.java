@@ -43,7 +43,7 @@ public class GoodsByTypeVO {
     }
 
     public void setImg(String img) {
-        this.img = img;
+        this.img = "http://localhost:8084/"+img;
     }
 
     public Integer getStockNum() {

@@ -7,19 +7,29 @@ package com.hanxiao.mall.model;
  **/
 
 public class Goods {
-    private int id;
+    private Integer id;
     private String name;
-    private int typeId;
+    private Integer typeId;
     private String image;
-    private int stockNum;
+    private Integer stockNum;
     private double price;
     private String description;
 
-    public int getId() {
+    public Goods(Integer id, String name, Integer typeId, String image, Integer stockNum, double price, String description) {
+        this.id = id;
+        this.name = name;
+        this.typeId = typeId;
+        this.image = image;
+        this.stockNum = stockNum;
+        this.price = price;
+        this.description = description;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -31,11 +41,11 @@ public class Goods {
         this.name = name;
     }
 
-    public int getTypeId() {
+    public Integer getTypeId() {
         return typeId;
     }
 
-    public void setTypeId(int typeId) {
+    public void setTypeId(Integer typeId) {
         this.typeId = typeId;
     }
 
@@ -47,11 +57,11 @@ public class Goods {
         this.image = image;
     }
 
-    public int getStockNum() {
+    public Integer getStockNum() {
         return stockNum;
     }
 
-    public void setStockNum(int stockNum) {
+    public void setStockNum(Integer stockNum) {
         this.stockNum = stockNum;
     }
 

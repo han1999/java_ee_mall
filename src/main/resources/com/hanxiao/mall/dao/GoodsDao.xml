@@ -4,10 +4,26 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hanxiao.mall.dao.GoodsDao">
     <select id="getType" resultType="com.hanxiao.mall.model.Type">
-        select id, name from t_type
+        select id, name
+        from t_type
     </select>
 
-    <select id="getGoodsByTypeVO" resultType="com.hanxiao.mall.model.Goods">
-        select id,name, typeId, image, stockNum, price, description from t_goods
+    <select id="getGoodsByType" resultType="com.hanxiao.mall.model.Goods">
+        select id, name, typeId, image, stockNum, price, description
+        from t_goods
+        where typeId = #{typeId}
     </select>
+
+    <insert id="addGoods" useGeneratedKeys="true" keyProperty="id">
+        insert into t_goods
+        values (null, #{name}, #{typeId}, #{image}, #{stockNum},
+                #{price}, #{description})
+    </insert>
+
+    <insert id="addSpecs">
+        insert into t_spec values
+        <foreach collection="collection" item="sp" separator=",">
+            (null, #{sp.name}, #{sp.stockNum}, #{sp.price}, #{sp.goodsId})
+        </foreach>
+    </insert>
 </mapper>

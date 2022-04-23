@@ -13,11 +13,11 @@ public class AddGoodsSpecBO {
      * specName : 默认
      * stockNum : 100
      */
-    private Integer unitPrice;
+    private Double unitPrice;
     private String specName;
     private Integer stockNum;
 
-    public void setUnitPrice(Integer unitPrice) {
+    public void setUnitPrice(Double unitPrice) {
         this.unitPrice = unitPrice;
     }
 
@@ -29,7 +29,7 @@ public class AddGoodsSpecBO {
         this.stockNum = stockNum;
     }
 
-    public Integer getUnitPrice() {
+    public Double getUnitPrice() {
         return unitPrice;
     }
 

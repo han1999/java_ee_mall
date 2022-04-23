@@ -2,7 +2,10 @@ package com.hanxiao.mall.service;
 
 import com.hanxiao.mall.dao.GoodsDao;
 import com.hanxiao.mall.model.Goods;
+import com.hanxiao.mall.model.Spec;
 import com.hanxiao.mall.model.Type;
+import com.hanxiao.mall.model.bo.AddGoodsBO;
+import com.hanxiao.mall.model.bo.AddGoodsSpecBO;
 import com.hanxiao.mall.model.vo.GoodsByTypeVO;
 import com.hanxiao.mall.utils.MybatisUtils;
 import org.apache.ibatis.session.SqlSession;
@@ -35,7 +38,7 @@ public class GoodsServiceImpl implements GoodsService {
     public List<GoodsByTypeVO> getGoodsByType(int typeId) {
         SqlSession sqlSession = MybatisUtils.openSession();
         GoodsDao goodsDao = sqlSession.getMapper(GoodsDao.class);
-        List<Goods> goodsList= goodsDao.getGoodsByTypeVO(typeId);
+        List<Goods> goodsList = goodsDao.getGoodsByType(typeId);
         List<GoodsByTypeVO> goodsByTypeVOList = new ArrayList<>();
         for (Goods goods : goodsList) {
             GoodsByTypeVO goodsByTypeVO = new GoodsByTypeVO();
@@ -48,5 +51,32 @@ public class GoodsServiceImpl implements GoodsService {
             goodsByTypeVOList.add(goodsByTypeVO);
         }
         return goodsByTypeVOList;
+    }
+
+    @Override
+    public void addGoods(AddGoodsBO addGoodsBO) {
+        List<AddGoodsSpecBO> specList = addGoodsBO.getSpecList();
+        Double price = specList.get(0).getUnitPrice();
+        Integer stockNum = specList.get(0).getStockNum();
+        for (int i = 1; i < specList.size(); i++) {
+            if (price > specList.get(i).getUnitPrice()) {
+                price = specList.get(i).getUnitPrice();
+            }
+            stockNum += specList.get(i).getStockNum();
+        }
+
+        SqlSession sqlSession = MybatisUtils.openSession();
+        GoodsDao goodsDao = sqlSession.getMapper(GoodsDao.class);
+        Goods goods = new Goods(null, addGoodsBO.getName(), addGoodsBO.getTypeId(), addGoodsBO.getImg(), stockNum, price, addGoodsBO.getDesc());
+        goodsDao.addGoods(goods);
+        //goods此时的id不是null了。
+        List<Spec> specs = new ArrayList<>();
+        for (AddGoodsSpecBO addGoodsSpecBO : specList) {
+            Spec spec = new Spec(null, addGoodsSpecBO.getSpecName(), addGoodsSpecBO.getStockNum(), addGoodsSpecBO.getUnitPrice(), goods.getId());
+            specs.add(spec);
+        }
+        goodsDao.addSpecs(specs);
+        sqlSession.commit();
+        sqlSession.close();
     }
 }

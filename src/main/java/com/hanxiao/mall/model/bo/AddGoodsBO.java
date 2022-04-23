@@ -21,6 +21,14 @@ public class AddGoodsBO {
     private Integer typeId;
     private String desc;
 
+    public List<AddGoodsSpecBO> getSpecList() {
+        return specList;
+    }
+
+    public void setSpecList(List<AddGoodsSpecBO> specList) {
+        this.specList = specList;
+    }
+
     private List<AddGoodsSpecBO> specList;
 
     public void setImg(String img) {

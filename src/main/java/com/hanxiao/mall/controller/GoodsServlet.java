@@ -40,6 +40,7 @@ public class GoodsServlet extends javax.servlet.http.HttpServlet {
         AddGoodsBO addGoodsBO = null;
         try {
             addGoodsBO = gson.fromJson(requestBody, AddGoodsBO.class);
+            goodsService.addGoods(addGoodsBO);
         } catch (Exception e) {
             response.getWriter().println(gson.toJson(Result.error("参数不合法！")));
             return;

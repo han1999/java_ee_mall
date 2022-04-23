@@ -7,17 +7,17 @@ package com.hanxiao.mall.model;
  **/
 
 public class Spec {
-    private int id;
+    private Integer id;
     private String name;
-    private int stockNum;
-    private double price;
-    private int goodsId;
+    private Integer stockNum;
+    private Double price;
+    private Integer goodsId;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -29,27 +29,35 @@ public class Spec {
         this.name = name;
     }
 
-    public int getStockNum() {
+    public Integer getStockNum() {
         return stockNum;
     }
 
-    public void setStockNum(int stockNum) {
+    public void setStockNum(Integer stockNum) {
         this.stockNum = stockNum;
     }
 
-    public double getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
-    public int getGoodsId() {
+    public Integer getGoodsId() {
         return goodsId;
     }
 
-    public void setGoodsId(int goodsId) {
+    public void setGoodsId(Integer goodsId) {
+        this.goodsId = goodsId;
+    }
+
+    public Spec(Integer id, String name, Integer stockNum, Double price, Integer goodsId) {
+        this.id = id;
+        this.name = name;
+        this.stockNum = stockNum;
+        this.price = price;
         this.goodsId = goodsId;
     }
 
