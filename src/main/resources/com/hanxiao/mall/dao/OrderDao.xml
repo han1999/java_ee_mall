@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hanxiao.mall.dao.OrderDao">
+    <select id="getOrdersTotal" resultType="java.lang.Integer">
+        select count(*)
+        from t_order
+        <where>
+            <if test="address != null and address != ''">
+                address like concat("%", #{address}, "%")
+            </if>
+            <if test="moneyLimit1 != null and moneyLimit1 != ''">
+                and amount &lt;= #{moneyLimit1}
+            </if>
+            <if test="moneyLimit2 != null and moneyLimit2 != ''">
+                and amount &gt;= #{moneyLimit2}
+            </if>
+            <if test="name != null and name != ''">
+                and receiver like concat("%", #{name}, "%")
+            </if>
+            <if test="goods != null and goods != ''">
+                and goodsName like concat("%", #{goods}, "%")
+            </if>
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="state != -1">
+                and stateId = #{state}
+            </if>
+        </where>
+    </select>
+
+    <select id="getOrders" parameterType="com.hanxiao.mall.model.bo.OrdersByPageBO" resultType="com.hanxiao.mall.model.vo.OrdersInOrdersByPageVO">
+      select id, userId, specId as goodsDetailId, goodsName as goods,
+      specName as spec, number as goodsNum, amount, stateId,
+      nickname, receiver as name, address, telephone as phone from t_order
+        <where>
+            <if test="address !=null and address !=''">
+                address like concat("%", #{address,jdbcType=VARCHAR}, "%")
+            </if>
+            <if test="moneyLimit1 != null and moneyLimit1 != ''">
+                and amount &lt;= #{moneyLimit1}
+            </if>
+            <if test="moneyLimit2 != null and moneyLimit2 != ''">
+                and amount &gt;= #{moneyLimit2}
+            </if>
+            <if test="name != null and name != ''">
+                and receiver like concat("%", #{name}, "%")
+            </if>
+            <if test="goods != null and goods != ''">
+                and goodsName like concat("%", #{goods}, "%")
+            </if>
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="state!=-1">
+                and stateId=#{state}
+            </if>
+        </where>
+        <!--${} 里面可以运算 -->
+        limit #{pagesize} offset ${(currentPage-1)*pagesize}
+    </select>
+</mapper>
