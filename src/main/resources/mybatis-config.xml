@@ -23,6 +23,8 @@
     </environments>
     <mappers>
         <!--<mapper resource="com/hanxiao/mapper/AccountMapper.xml"/>-->
-        <package name="com.hanxiao.mall.dao"/>
+        <!--<package name="com.hanxiao.mall.dao"/>-->
+        <mapper resource="com/hanxiao/mall/dao/AdminDao.xml"/>
+        <mapper resource="com/hanxiao/mall/dao/GoodsDao.xml"/>
     </mappers>
 </configuration>
