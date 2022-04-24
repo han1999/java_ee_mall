@@ -26,5 +26,6 @@
         <!--<package name="com.hanxiao.mall.dao"/>-->
         <mapper resource="com/hanxiao/mall/dao/AdminDao.xml"/>
         <mapper resource="com/hanxiao/mall/dao/GoodsDao.xml"/>
+        <mapper resource="com/hanxiao/mall/dao/OrderDao.xml"/>
     </mappers>
 </configuration>

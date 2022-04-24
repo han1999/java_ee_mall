@@ -1,5 +1,9 @@
 package com.hanxiao.mall.model.vo;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
 /**
  * @description:
  * @author: Han Xiao
@@ -7,12 +11,24 @@ package com.hanxiao.mall.model.vo;
  **/
 
 public class GoodsByTypeVO {
+    private static String domain;
+    static {
+        InputStream inputStream = GoodsByTypeVO.class.getClassLoader().getResourceAsStream("application.properties");
+        Properties properties = new Properties();
+        try {
+            properties.load(inputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        domain = properties.getProperty("domain");
+    }
     private Integer id;
     private String name;
     private Integer typeId;
     private String img;
     private Integer stockNum;
     private Double price;
+
 
     public Integer getId() {
         return id;
@@ -43,7 +59,7 @@ public class GoodsByTypeVO {
     }
 
     public void setImg(String img) {
-        this.img = "http://localhost:8084/"+img;
+        this.img = domain+img;
     }
 
     public Integer getStockNum() {
